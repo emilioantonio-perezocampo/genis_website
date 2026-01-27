@@ -15,6 +15,12 @@ class AppTheme {
   static const slate900 = Color(0xFF0F172A);
   static const slate950 = Color(0xFF020617);
 
+  // Tailwind Blue Palette (for links/active states)
+  static const blue50 = Color(0xFFEFF6FF);
+  static const blue100 = Color(0xFFDBEAFE);
+  static const blue600 = Color(0xFF2563EB);
+  static const blue700 = Color(0xFF1D4ED8);
+
   // Brand Colors from CSS
   static const brandPrimary = Color(0xFF030213);
   static const brandDestructive = Color(0xFFD4183D);

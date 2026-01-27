@@ -57,7 +57,7 @@ class _PublicHeaderState extends State<_PublicHeader> {
     // sticking to solid/translucent background for MVP reliability)
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
+        color: Colors.white.withValues(alpha: 0.8),
         border: Border(bottom: BorderSide(color: theme.colorScheme.outlineVariant)),
       ),
       child: Column(
@@ -100,8 +100,8 @@ class _PublicHeaderState extends State<_PublicHeader> {
                             style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w500,
                               color: isActive
-                                  ? theme.colorScheme.primary
-                                  : theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                                  ? AppTheme.blue600 // text-blue-600
+                                  : AppTheme.slate600, // text-slate-600
                             ),
                           ),
                         ),
