@@ -81,84 +81,99 @@ class _PortalNotificationsPageState extends State<PortalNotificationsPage> {
               separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemBuilder: (context, index) {
                 final notification = filteredNotifications[index];
-                return AppCard(
-                  padding: const EdgeInsets.all(16),
-                  // Emulate "border-l-4 border-l-blue-500 bg-blue-50/10" via decoration overrides if needed,
-                  // or wrapping content. AppCard styles are somewhat fixed, so I'll wrap content for the "read" opacity.
-                  child: Opacity(
-                    opacity: notification.read ? 0.75 : 1.0,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: !notification.read ? AppTheme.blue100 : AppTheme.slate100,
-                            shape: BoxShape.circle,
+                return Container(
+                  decoration: !notification.read
+                      ? BoxDecoration(
+                          color: AppTheme.blue50.withValues(alpha: 0.1),
+                          border: const Border(
+                            left: BorderSide(color: AppTheme.blue600, width: 4),
+                            top: BorderSide(color: AppTheme.slate200),
+                            right: BorderSide(color: AppTheme.slate200),
+                            bottom: BorderSide(color: AppTheme.slate200),
                           ),
-                          child: Icon(
-                            LucideIcons.bell,
-                            size: 16,
-                            color: !notification.read ? AppTheme.blue600 : AppTheme.slate400,
+                          borderRadius: BorderRadius.circular(10),
+                        )
+                      : null,
+                  child: AppCard(
+                    padding: const EdgeInsets.all(16),
+                    // If read, use default card style. If unread, we override borders above, so we need to transparentize AppCard
+                    side: !notification.read ? BorderSide.none : null,
+                    color: !notification.read ? Colors.transparent : null,
+                    child: Opacity(
+                      opacity: notification.read ? 0.75 : 1.0,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: !notification.read ? AppTheme.blue100 : AppTheme.slate100,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              LucideIcons.bell,
+                              size: 16,
+                              color: !notification.read ? AppTheme.blue600 : AppTheme.slate400,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      notification.text,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: !notification.read ? FontWeight.w600 : FontWeight.w500,
-                                        color: !notification.read ? AppTheme.slate900 : AppTheme.slate700,
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        notification.text,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: !notification.read ? FontWeight.w600 : FontWeight.w500,
+                                          color: !notification.read ? AppTheme.slate900 : AppTheme.slate700,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Text(
-                                    notification.date,
-                                    style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  AppBadge(
-                                    label: notification.type,
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: AppTheme.slate700,
-                                  ), // Simulated outline badge
-                                  if (!notification.read) ...[
-                                    const Spacer(),
-                                    InkWell(
-                                      onTap: () {
-                                        // Mark as read logic would go here (requires state management lift)
-                                      },
-                                      child: const Row(
-                                        children: [
-                                          Icon(LucideIcons.check, size: 12, color: AppTheme.blue600),
-                                          SizedBox(width: 4),
-                                          Text(
-                                            "Mark as read",
-                                            style: TextStyle(fontSize: 12, color: AppTheme.blue600),
-                                          ),
-                                        ],
-                                      ),
+                                    const SizedBox(width: 16),
+                                    Text(
+                                      notification.date,
+                                      style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
                                     ),
                                   ],
-                                ],
-                              ),
-                            ],
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    AppBadge(
+                                      label: notification.type,
+                                      backgroundColor: Colors.white,
+                                      foregroundColor: AppTheme.slate700,
+                                    ), // Simulated outline badge
+                                    if (!notification.read) ...[
+                                      const Spacer(),
+                                      InkWell(
+                                        onTap: () {
+                                          // Mark as read logic would go here (requires state management lift)
+                                        },
+                                        child: const Row(
+                                          children: [
+                                            Icon(LucideIcons.check, size: 12, color: AppTheme.blue600),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              "Mark as read",
+                                              style: TextStyle(fontSize: 12, color: AppTheme.blue600),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

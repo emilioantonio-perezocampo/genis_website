@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/theme/app_theme.dart';
@@ -236,7 +237,8 @@ class _ProofMetricsSection extends StatelessWidget {
                       color: AppTheme.slate700, // Slate 700
                       borderRadius: BorderRadius.circular(4),
                     ),
-                  ),
+                  ).animate(onPlay: (controller) => controller.repeat(reverse: true))
+                   .fade(duration: 1200.ms, begin: 0.5, end: 1.0),
                 ),
               ),
             ],

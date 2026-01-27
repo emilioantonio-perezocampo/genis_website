@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/shared/data/mock_data.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class AdminDashboard extends StatelessWidget {
@@ -32,7 +33,7 @@ class AdminDashboard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       "Managing ${projects.length} active projects across 2 clients.",
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: const TextStyle(color: AppTheme.slate600),
                     ),
                   ],
                 ),
@@ -88,14 +89,14 @@ class AdminDashboard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Updates Due This Week", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                          Text("Projects requiring a weekly status report.", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey)),
+                          Text("Projects requiring a weekly status report.", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppTheme.slate500)),
                           const SizedBox(height: 24),
                           ...projects.map((p) => Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                             margin: const EdgeInsets.only(bottom: 12),
                             decoration: BoxDecoration(
-                              color: Colors.grey[50],
-                              border: Border.all(color: Colors.grey[200]!),
+                              color: AppTheme.slate50,
+                              border: Border.all(color: AppTheme.slate200),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
@@ -109,7 +110,7 @@ class AdminDashboard extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(p.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                                        Text(p.client, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                                        Text(p.client, style: const TextStyle(color: AppTheme.slate500, fontSize: 12)),
                                       ],
                                     ),
                                   ],
@@ -138,7 +139,7 @@ class AdminDashboard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Project Health", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                          Text("Status snapshot across the portfolio.", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey)),
+                          Text("Status snapshot across the portfolio.", style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppTheme.slate500)),
                           const SizedBox(height: 24),
                           ...projects.map((p) => Padding(
                             padding: const EdgeInsets.only(bottom: 16),
@@ -192,7 +193,7 @@ class _StatCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(value, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: valueColor ?? Colors.black87)),
-              Text(subtext, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+              Text(subtext, style: const TextStyle(color: AppTheme.slate500, fontSize: 12)),
             ],
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/shared/data/mock_data.dart';
 import 'package:genis_website/src/shared/domain/models.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -57,6 +58,8 @@ class PortalDashboard extends StatelessWidget {
           // Quick Stats
           AppCard(
             padding: const EdgeInsets.all(24),
+            color: AppTheme.slate50,
+            side: const BorderSide(color: AppTheme.blue100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -68,13 +71,13 @@ class PortalDashboard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _UpdateLineItem(
+                const _UpdateLineItem(
                   color: Colors.blue,
                   label: "Enterprise Search RAG:",
                   text: "New architecture diagram uploaded.",
                 ),
                 const SizedBox(height: 8),
-                _UpdateLineItem(
+                const _UpdateLineItem(
                   color: Colors.red,
                   label: "Supply Chain Optimization:",
                   text: "Status changed to Blocked (waiting on API keys).",
@@ -94,14 +97,14 @@ class PortalDashboard extends StatelessWidget {
               border: Border.all(color: Colors.grey[200]!),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(LucideIcons.alertCircle, size: 14, color: Colors.grey[500]),
-                const SizedBox(width: 8),
+                Icon(LucideIcons.alertCircle, size: 14, color: Colors.grey),
+                SizedBox(width: 8),
                 Text(
                   "You only see your organization's projects and content.",
-                  style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
             ),
