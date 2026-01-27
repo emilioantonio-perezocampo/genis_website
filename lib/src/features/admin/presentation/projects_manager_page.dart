@@ -55,7 +55,7 @@ class ProjectsManagerPage extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: projects.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 16),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
               final project = projects[index];
               Color statusBg;

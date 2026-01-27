@@ -45,9 +45,7 @@ class AppTable extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
             ),
             child: Row(
-              children: columns.asMap().entries.map((entry) {
-                final index = entry.key;
-                final col = entry.value;
+              children: columns.map((col) {
                 return Expanded(
                   flex: col.width == null ? 1 : 0,
                   child: SizedBox(
