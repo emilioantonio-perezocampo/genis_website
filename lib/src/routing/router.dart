@@ -5,6 +5,8 @@ import 'package:genis_website/src/features/public/presentation/services_page.dar
 import 'package:genis_website/src/features/public/presentation/case_studies_page.dart';
 import 'package:genis_website/src/features/public/presentation/contact_page.dart';
 import 'package:genis_website/src/features/public/presentation/public_layout.dart';
+import 'package:genis_website/src/features/public/presentation/not_found_page.dart';
+import 'package:genis_website/src/features/public/presentation/access_denied_page.dart';
 import 'package:genis_website/src/features/auth/presentation/login_page.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_layout.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_dashboard.dart';
@@ -17,10 +19,13 @@ import 'package:genis_website/src/features/admin/presentation/clients_manager_pa
 import 'package:genis_website/src/features/admin/presentation/projects_manager_page.dart';
 import 'package:genis_website/src/features/admin/presentation/deliverables_manager_page.dart';
 import 'package:genis_website/src/features/admin/presentation/audit_log_page.dart';
+import 'package:genis_website/src/features/admin/presentation/updates_editor_page.dart';
+import 'package:genis_website/src/features/admin/presentation/docs_editor_page.dart';
 import 'package:genis_website/src/shared/components/placeholder_screen.dart';
 
 final router = GoRouter(
   initialLocation: '/',
+  errorBuilder: (context, state) => const NotFoundPage(),
   routes: [
     // Public Routes
     ShellRoute(
@@ -59,6 +64,14 @@ final router = GoRouter(
     GoRoute(
       path: '/login',
       builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      path: '/403',
+      builder: (context, state) => const AccessDeniedPage(),
+    ),
+    GoRoute(
+      path: '/404',
+      builder: (context, state) => const NotFoundPage(),
     ),
 
     // Portal (Protected)
@@ -121,11 +134,11 @@ final router = GoRouter(
         ),
          GoRoute(
           path: '/admin/updates/new',
-          builder: (context, state) => const PlaceholderScreen(title: 'New Update'),
+          builder: (context, state) => const UpdatesEditorPage(),
         ),
          GoRoute(
           path: '/admin/docs/new',
-          builder: (context, state) => const PlaceholderScreen(title: 'New Doc'),
+          builder: (context, state) => const DocsEditorPage(),
         ),
       ],
     ),
