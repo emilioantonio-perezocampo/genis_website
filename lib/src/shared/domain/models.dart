@@ -108,3 +108,21 @@ class CaseStudy {
     required this.image,
   });
 }
+
+class AppNotification {
+  final String id;
+  final String clientId;
+  final String text;
+  final String date;
+  final bool read;
+  final String type;
+
+  const AppNotification({
+    required this.id,
+    required this.clientId,
+    required this.text,
+    required this.date,
+    required this.read,
+    required this.type,
+  });
+}

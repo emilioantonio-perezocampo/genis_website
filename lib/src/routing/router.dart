@@ -74,13 +74,18 @@ final router = GoRouter(
             return ProjectDetailPage(id: id);
           },
         ),
+import 'package:genis_website/src/features/portal/presentation/portal_search_page.dart';
+import 'package:genis_website/src/features/portal/presentation/portal_notifications_page.dart';
+
+// ...
+
         GoRoute(
           path: '/portal/search',
-          builder: (context, state) => const PlaceholderScreen(title: 'Search'),
+          builder: (context, state) => const PortalSearchPage(),
         ),
         GoRoute(
           path: '/portal/notifications',
-          builder: (context, state) => const PlaceholderScreen(title: 'Notifications'),
+          builder: (context, state) => const PortalNotificationsPage(),
         ),
       ],
     ),

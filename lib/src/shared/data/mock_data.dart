@@ -110,3 +110,9 @@ const clients = [
   Client(id: "1", name: "Acme Corp", email: "admin@acme.com", role: "Admin", status: "Active"),
   Client(id: "2", name: "LogistiCo", email: "cto@logistico.com", role: "Viewer", status: "Active"),
 ];
+
+const notifications = [
+  AppNotification(id: "n1", clientId: "1", text: "New update posted for Enterprise Search RAG", date: "2 hours ago", read: false, type: "update"),
+  AppNotification(id: "n2", clientId: "1", text: "Milestone 'Architecture Validation' completed", date: "1 day ago", read: true, type: "milestone"),
+  AppNotification(id: "n3", clientId: "1", text: "New document 'API Specs' published", date: "2 days ago", read: true, type: "doc"),
+];
