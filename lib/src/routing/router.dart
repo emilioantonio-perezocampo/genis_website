@@ -8,7 +8,11 @@ import 'package:genis_website/src/features/public/presentation/public_layout.dar
 import 'package:genis_website/src/features/auth/presentation/login_page.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_layout.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_dashboard.dart';
+import 'package:genis_website/src/features/portal/presentation/project_detail_page.dart';
 import 'package:genis_website/src/features/admin/presentation/admin_layout.dart';
+import 'package:genis_website/src/features/admin/presentation/admin_dashboard.dart';
+import 'package:genis_website/src/features/admin/presentation/clients_manager_page.dart';
+import 'package:genis_website/src/features/admin/presentation/projects_manager_page.dart';
 import 'package:genis_website/src/shared/components/placeholder_screen.dart';
 
 final router = GoRouter(
@@ -63,10 +67,6 @@ final router = GoRouter(
           path: '/portal/dashboard',
           builder: (context, state) => const PortalDashboard(),
         ),
-import 'package:genis_website/src/features/portal/presentation/project_detail_page.dart';
-
-// ...
-
         GoRoute(
           path: '/portal/projects/:id',
           builder: (context, state) {
@@ -84,15 +84,6 @@ import 'package:genis_website/src/features/portal/presentation/project_detail_pa
         ),
       ],
     ),
-
-import 'package:genis_website/src/features/admin/presentation/admin_dashboard.dart';
-
-// ...
-
-import 'package:genis_website/src/features/admin/presentation/clients_manager_page.dart';
-import 'package:genis_website/src/features/admin/presentation/projects_manager_page.dart';
-
-// ...
 
     // Admin (Protected)
     ShellRoute(
