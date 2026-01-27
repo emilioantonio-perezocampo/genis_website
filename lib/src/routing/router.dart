@@ -63,9 +63,16 @@ final router = GoRouter(
           path: '/portal/dashboard',
           builder: (context, state) => const PortalDashboard(),
         ),
+import 'package:genis_website/src/features/portal/presentation/project_detail_page.dart';
+
+// ...
+
         GoRoute(
           path: '/portal/projects/:id',
-          builder: (context, state) => const PlaceholderScreen(title: 'Project Detail'),
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return ProjectDetailPage(id: id);
+          },
         ),
         GoRoute(
           path: '/portal/search',
@@ -78,6 +85,15 @@ final router = GoRouter(
       ],
     ),
 
+import 'package:genis_website/src/features/admin/presentation/admin_dashboard.dart';
+
+// ...
+
+import 'package:genis_website/src/features/admin/presentation/clients_manager_page.dart';
+import 'package:genis_website/src/features/admin/presentation/projects_manager_page.dart';
+
+// ...
+
     // Admin (Protected)
     ShellRoute(
       builder: (context, state, child) {
@@ -86,15 +102,15 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: '/admin/dashboard',
-          builder: (context, state) => const PlaceholderScreen(title: 'Admin Dashboard'),
+          builder: (context, state) => const AdminDashboard(),
         ),
         GoRoute(
           path: '/admin/clients',
-          builder: (context, state) => const PlaceholderScreen(title: 'Clients Manager'),
+          builder: (context, state) => const ClientsManagerPage(),
         ),
         GoRoute(
           path: '/admin/projects',
-          builder: (context, state) => const PlaceholderScreen(title: 'Projects Manager'),
+          builder: (context, state) => const ProjectsManagerPage(),
         ),
         GoRoute(
           path: '/admin/deliverables',
