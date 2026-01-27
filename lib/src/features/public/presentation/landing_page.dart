@@ -333,7 +333,7 @@ class _TimelineSection extends StatelessWidget {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0F172A),
+                            color: AppTheme.slate900,
                             borderRadius: BorderRadius.circular(24),
                             border: Border.all(color: Colors.white, width: 4),
                             boxShadow: [
@@ -400,7 +400,7 @@ class _CTASection extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 32),
             decoration: BoxDecoration(
-              color: const Color(0xFF0F172A),
+              color: AppTheme.slate900,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
