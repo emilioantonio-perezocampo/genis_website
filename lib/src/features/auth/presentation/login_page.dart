@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:genis_website/src/shared/components/app_button.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
+import 'package:genis_website/src/shared/components/app_text_field.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -14,15 +17,21 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
-  void _handleLogin() {
+  void _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
     
+    setState(() => _isLoading = true);
+    await Future.delayed(const Duration(seconds: 1)); // Mock delay
+    
     final email = _emailController.text;
-    if (email.contains("admin")) {
-      context.go('/admin/dashboard');
-    } else {
-      context.go('/portal/dashboard');
+    if (mounted) {
+      if (email.contains("admin")) {
+        context.go('/admin/dashboard');
+      } else {
+        context.go('/portal/dashboard');
+      }
     }
   }
 
@@ -37,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC), // slate-50
+      backgroundColor: AppTheme.slate50, // slate-50
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -49,14 +58,14 @@ class _LoginPageState extends State<LoginPage> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(LucideIcons.globe, size: 32, color: Color(0xFF0F172A)),
+                    const Icon(LucideIcons.globe, size: 32, color: AppTheme.slate900),
                     const SizedBox(width: 8),
                     Text(
                       'GIS',
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         letterSpacing: -1.0,
-                        color: const Color(0xFF0F172A),
+                        color: AppTheme.slate900,
                       ),
                     ),
                   ],
@@ -79,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                         'Enter your email to access your project dashboard',
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                          color: AppTheme.slate500,
                         ),
                       ),
                       const SizedBox(height: 32),
@@ -90,13 +99,9 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             const Text("Email", style: TextStyle(fontWeight: FontWeight.w500)),
                             const SizedBox(height: 8),
-                            TextFormField(
+                            AppTextField(
                               controller: _emailController,
-                              decoration: const InputDecoration(
-                                hintText: "name@company.com",
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                              ),
+                              placeholder: "name@company.com",
                               validator: (value) => value == null || value.isEmpty ? 'Required' : null,
                             ),
                             const SizedBox(height: 16),
@@ -104,30 +109,26 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text("Password", style: TextStyle(fontWeight: FontWeight.w500)),
-                                Text(
+                                const Text(
                                   "Forgot password?", 
-                                  style: TextStyle(color: theme.colorScheme.primary, fontSize: 12, fontWeight: FontWeight.w500),
+                                  style: TextStyle(color: AppTheme.blue600, fontSize: 12, fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 8),
-                            TextFormField(
+                            AppTextField(
                               controller: _passwordController,
                               obscureText: true,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                              ),
                               validator: (value) => value == null || value.isEmpty ? 'Required' : null,
                             ),
                             const SizedBox(height: 24),
                             SizedBox(
                               width: double.infinity,
-                              height: 48,
-                              child: FilledButton.icon(
+                              child: AppButton(
                                 onPressed: _handleLogin,
-                                icon: const Icon(LucideIcons.lock, size: 16),
-                                label: const Text("Sign In"),
+                                icon: LucideIcons.lock,
+                                label: "Sign In",
+                                isLoading: _isLoading,
                               ),
                             ),
                           ],
@@ -136,33 +137,33 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 24),
                       Row(
                         children: [
-                          Expanded(child: Divider(color: Colors.grey.shade200)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          Expanded(child: Divider(color: AppTheme.slate200)),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
                               "OR CONTINUE WITH",
-                              style: TextStyle(fontSize: 10, color: Colors.grey.shade500, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 10, color: AppTheme.slate500, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Expanded(child: Divider(color: Colors.grey.shade200)),
+                          Expanded(child: Divider(color: AppTheme.slate200)),
                         ],
                       ),
                       const SizedBox(height: 24),
-                      SizedBox(
+                      const SizedBox(
                         width: double.infinity,
-                        height: 48,
-                        child: OutlinedButton(
+                        child: AppButton(
                           onPressed: null, // Disabled
-                          child: const Text("SSO / Enterprise ID (Optional)"),
+                          label: "SSO / Enterprise ID (Optional)",
+                          variant: AppButtonVariant.outline,
                         ),
                       ),
                       const SizedBox(height: 16),
                       Wrap(
                         alignment: WrapAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Access is restricted to authorized clients only. ",
-                            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
                           ),
                           InkWell(
                             onTap: () => context.go('/contact'),

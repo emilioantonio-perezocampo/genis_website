@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:genis_website/src/shared/components/app_badge.dart';
+import 'package:genis_website/src/shared/components/app_button.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
@@ -19,7 +20,6 @@ class LandingPage extends StatelessWidget {
           const _ProofMetricsSection(),
           const _TimelineSection(),
           const _CTASection(),
-          // Add some bottom padding
           const SizedBox(height: 80),
         ],
       ),
@@ -57,7 +57,7 @@ class _HeroSection extends StatelessWidget {
                 'Data, ML, and Agentic Systems that ship. We bridge the gap between AI research and reliable production software.',
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: AppTheme.slate500,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -67,22 +67,16 @@ class _HeroSection extends StatelessWidget {
                 runSpacing: 16,
                 alignment: WrapAlignment.center,
                 children: [
-                  FilledButton(
+                  AppButton(
                     onPressed: () => context.go('/contact'),
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-                      textStyle: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    child: const Text('Start a Project'),
+                    label: 'Start a Project',
+                    size: AppButtonSize.lg,
                   ),
-                  OutlinedButton(
+                  AppButton(
                     onPressed: () => context.go('/contact'),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-                      textStyle: const TextStyle(fontWeight: FontWeight.w600),
-                      side: BorderSide(color: theme.colorScheme.outline),
-                    ),
-                    child: const Text('Request Portal Access'),
+                    label: 'Request Portal Access',
+                    variant: AppButtonVariant.outline,
+                    size: AppButtonSize.lg,
                   ),
                 ],
               ),
@@ -160,7 +154,7 @@ class _ValuePropsSection extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(item.icon, size: 32, color: Theme.of(context).colorScheme.onSurface),
+                        Icon(item.icon, size: 32, color: AppTheme.slate700),
                         const SizedBox(height: 16),
                         Text(
                           item.title,
@@ -172,7 +166,7 @@ class _ValuePropsSection extends StatelessWidget {
                         Text(
                           item.desc,
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                color: AppTheme.slate600,
                               ),
                         ),
                       ],
@@ -194,7 +188,7 @@ class _ProofMetricsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF0F172A), // Slate 900
+      color: AppTheme.slate900,
       padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 24),
       width: double.infinity,
       child: Center(
@@ -213,12 +207,12 @@ class _ProofMetricsSection extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 64),
-              const Divider(color: AppTheme.slate800), // Slate 800
+              const Divider(color: AppTheme.slate800),
               const SizedBox(height: 32),
               Text(
                 "TRUSTED BY INNOVATIVE TEAMS",
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: AppTheme.slate500, // Slate 500
+                      color: AppTheme.slate500,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
                     ),
@@ -234,7 +228,7 @@ class _ProofMetricsSection extends StatelessWidget {
                     width: 128,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: AppTheme.slate700, // Slate 700
+                      color: AppTheme.slate700,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ).animate(onPlay: (controller) => controller.repeat(reverse: true))
@@ -272,7 +266,7 @@ class _MetricItem extends StatelessWidget {
         Text(
           label.toUpperCase(),
           style: const TextStyle(
-            color: AppTheme.slate400, // Slate 400
+            color: AppTheme.slate400,
             fontSize: 14,
             letterSpacing: 1.5,
             fontWeight: FontWeight.w500,
@@ -313,7 +307,7 @@ class _TimelineSection extends StatelessWidget {
               Text(
                 "A transparent, iterative process designed for velocity.",
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                      color: AppTheme.slate500,
                     ),
               ),
               const SizedBox(height: 64),
@@ -323,9 +317,6 @@ class _TimelineSection extends StatelessWidget {
                 itemCount: steps.length,
                 itemBuilder: (context, index) {
                   final item = steps[index];
-                  // Simple vertical timeline for now. 
-                  // Implementing the alternating/zigzag layout on web can be complex with standard Rows
-                  // sticking to a clean vertical list for MVP.
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 48.0),
                     child: Row(
@@ -370,7 +361,7 @@ class _TimelineSection extends StatelessWidget {
                               Text(
                                 item.desc,
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                      color: AppTheme.slate600,
                                     ),
                               ),
                             ],
@@ -417,15 +408,11 @@ class _CTASection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                FilledButton(
+                AppButton(
                   onPressed: () => context.go('/contact'),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppTheme.slate100, // Secondary light
-                    foregroundColor: AppTheme.slate900, // Secondary foreground
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
-                    textStyle: const TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  child: const Text('Start a Project'),
+                  label: 'Start a Project',
+                  variant: AppButtonVariant.secondary,
+                  size: AppButtonSize.lg,
                 ),
               ],
             ),
