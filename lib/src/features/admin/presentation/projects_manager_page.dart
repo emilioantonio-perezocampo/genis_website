@@ -58,12 +58,11 @@ class ProjectsManagerPage extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
               final project = projects[index];
-              Color statusBg;
-              Color statusFg;
+              AppBadgeVariant statusVariant;
               switch (project.status) {
-                case "In Progress": statusBg = Colors.blue[50]!; statusFg = Colors.blue[700]!; break;
-                case "Blocked": statusBg = Colors.red[50]!; statusFg = Colors.red[700]!; break;
-                default: statusBg = Colors.grey[100]!; statusFg = Colors.grey[700]!;
+                case "In Progress": statusVariant = AppBadgeVariant.info; break;
+                case "Blocked": statusVariant = AppBadgeVariant.destructive; break;
+                default: statusVariant = AppBadgeVariant.secondary;
               }
 
               return AppCard(
@@ -79,7 +78,7 @@ class ProjectsManagerPage extends StatelessWidget {
                             children: [
                               Text(project.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                               const SizedBox(width: 12),
-                              AppBadge(label: project.client, backgroundColor: Colors.white, foregroundColor: Colors.black87), // Outline style simulated
+                              AppBadge(label: project.client, variant: AppBadgeVariant.outline),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -94,7 +93,7 @@ class ProjectsManagerPage extends StatelessWidget {
                       children: [
                         Text("Status:", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[500])),
                         const SizedBox(width: 8),
-                        AppBadge(label: project.status, backgroundColor: statusBg, foregroundColor: statusFg),
+                        AppBadge(label: project.status, variant: statusVariant),
                       ],
                     ),
 

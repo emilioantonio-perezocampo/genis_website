@@ -66,9 +66,8 @@ class DeliverablesManagerPage extends StatelessWidget {
               Text(file.date, style: const TextStyle(color: AppTheme.slate500)),
               const AppBadge(
                 label: "Client Only",
-                backgroundColor: Colors.white,
-                foregroundColor: AppTheme.slate600,
-              ), // Simulated outline with lock
+                variant: AppBadgeVariant.outline,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

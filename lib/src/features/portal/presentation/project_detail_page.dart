@@ -194,16 +194,15 @@ class _ProjectStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color bg;
-    Color fg;
+    AppBadgeVariant variant;
     switch (status) {
-      case "In Progress": bg = Colors.blue[50]!; fg = Colors.blue[700]!; break;
-      case "Blocked": bg = Colors.red[50]!; fg = Colors.red[700]!; break;
-      case "Review": bg = Colors.orange[50]!; fg = Colors.orange[700]!; break;
-      case "Done": bg = Colors.green[50]!; fg = Colors.green[700]!; break;
-      default: bg = Colors.grey[100]!; fg = Colors.grey[700]!;
+      case "In Progress": variant = AppBadgeVariant.info; break;
+      case "Blocked": variant = AppBadgeVariant.destructive; break;
+      case "Review": variant = AppBadgeVariant.warning; break;
+      case "Done": variant = AppBadgeVariant.success; break;
+      default: variant = AppBadgeVariant.secondary;
     }
-    return AppBadge(label: status, backgroundColor: bg, foregroundColor: fg);
+    return AppBadge(label: status, variant: variant);
   }
 }
 
@@ -433,14 +432,14 @@ class _MilestonesTab extends StatelessWidget {
             leading: Icon(LucideIcons.calendar, size: 16),
             title: Text("Project Kickoff", style: TextStyle(fontWeight: FontWeight.bold)),
             subtitle: Text("Initial requirements gathering and team alignment."),
-            trailing: AppBadge(label: "Done", backgroundColor: Color(0xFFF0FDF4), foregroundColor: Color(0xFF15803D)),
+            trailing: AppBadge(label: "Done", variant: AppBadgeVariant.success),
           ),
           Divider(),
           ListTile(
             leading: Icon(LucideIcons.calendar, size: 16),
             title: Text("Architecture Validation", style: TextStyle(fontWeight: FontWeight.bold)),
             subtitle: Text("Vector DB benchmarking."),
-            trailing: AppBadge(label: "In Progress", backgroundColor: Color(0xFFEFF6FF), foregroundColor: Color(0xFF1D4ED8)),
+            trailing: AppBadge(label: "In Progress", variant: AppBadgeVariant.info),
           ),
         ],
       ),

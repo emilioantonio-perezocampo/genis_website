@@ -40,7 +40,7 @@ class _HeroSection extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 800),
           child: Column(
             children: [
-              const AppBadge(label: 'Enterprise AI & Data Engineering'),
+              const AppBadge(label: 'Enterprise AI & Data Engineering', variant: AppBadgeVariant.secondary),
               const SizedBox(height: 32),
               Text(
                 'General Intelligence Solutions',

@@ -71,8 +71,7 @@ class ClientsManagerPage extends StatelessWidget {
               ),
               AppBadge(
                 label: client.status ?? "Unknown",
-                backgroundColor: client.status == "Active" ? Colors.green[50] : Colors.grey[100],
-                foregroundColor: client.status == "Active" ? Colors.green[700] : Colors.grey[700],
+                variant: client.status == "Active" ? AppBadgeVariant.success : AppBadgeVariant.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

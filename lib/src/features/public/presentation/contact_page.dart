@@ -177,10 +177,10 @@ class _ContactPageState extends State<ContactPage> {
                                 const SizedBox(height: 16),
                                 const _DropdownInput(
                                   options: [
-                                    "< $25k (Advisory/Audit)",
-                                    "$25k - $50k (MVP Sprint)",
-                                    "$50k - $100k (Full Project)",
-                                    "$100k+ (Enterprise/Retainer)",
+                                    "< \$25k (Advisory/Audit)",
+                                    "\$25k - \$50k (MVP Sprint)",
+                                    "\$50k - \$100k (Full Project)",
+                                    "\$100k+ (Enterprise/Retainer)",
                                   ],
                                 ),
                                 const SizedBox(height: 16),

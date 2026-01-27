@@ -144,12 +144,10 @@ class _PortalNotificationsPageState extends State<PortalNotificationsPage> {
                                 const SizedBox(height: 8),
                                 Row(
                                   children: [
-                                    AppBadge(
-                                      label: notification.type,
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: AppTheme.slate700,
-                                    ), // Simulated outline badge
-                                    if (!notification.read) ...[
+                                                                      AppBadge(
+                                                                        label: notification.type,
+                                                                        variant: AppBadgeVariant.outline,
+                                                                      ),                                    if (!notification.read) ...[
                                       const Spacer(),
                                       InkWell(
                                         onTap: () {

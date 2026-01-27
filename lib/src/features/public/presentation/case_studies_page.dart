@@ -118,8 +118,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                 left: 16,
                                 child: AppBadge(
                                   label: study.industry,
-                                  backgroundColor: Colors.white.withValues(alpha: 0.9),
-                                  foregroundColor: Colors.black,
+                                  variant: AppBadgeVariant.secondary,
                                 ),
                               ),
                             ],

@@ -97,7 +97,7 @@ class _PortalSearchPageState extends State<PortalSearchPage> {
                                 Text(p.description, style: const TextStyle(fontSize: 14, color: AppTheme.slate500)),
                               ],
                             ),
-                            AppBadge(label: p.status, backgroundColor: AppTheme.slate100, foregroundColor: AppTheme.slate700),
+                            AppBadge(label: p.status, variant: AppBadgeVariant.secondary),
                           ],
                         ),
                       ),
