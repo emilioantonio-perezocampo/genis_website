@@ -32,9 +32,8 @@ jobs:
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
-        # NOTE: If you are using a custom domain (e.g. www.example.com), remove the --base-href argument
-        # or set it to "/"
+        run: flutter build web --release
+        # Base-href defaults to "/" which is correct for custom domains (www.genis.dev)
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
