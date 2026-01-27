@@ -126,3 +126,19 @@ class AppNotification {
     required this.type,
   });
 }
+
+class AuditLogEntry {
+  final String id;
+  final String action;
+  final String user;
+  final String date;
+  final String? details;
+
+  const AuditLogEntry({
+    required this.id,
+    required this.action,
+    required this.user,
+    required this.date,
+    this.details,
+  });
+}

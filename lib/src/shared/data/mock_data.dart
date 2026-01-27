@@ -116,3 +116,9 @@ const notifications = [
   AppNotification(id: "n2", clientId: "1", text: "Milestone 'Architecture Validation' completed", date: "1 day ago", read: true, type: "milestone"),
   AppNotification(id: "n3", clientId: "1", text: "New document 'API Specs' published", date: "2 days ago", read: true, type: "doc"),
 ];
+
+const auditLogs = [
+  AuditLogEntry(id: "al1", action: "Login", user: "Acme Admin", date: "2024-03-12 09:00:00"),
+  AuditLogEntry(id: "al2", action: "Download", user: "Acme User", date: "2024-03-11 14:30:00", details: "Downloaded architecture_diagram.pdf"),
+  AuditLogEntry(id: "al3", action: "Status Change", user: "Giovanna (GIS)", date: "2024-03-10 16:45:00", details: "Changed Project 1 status to In Progress"),
+];

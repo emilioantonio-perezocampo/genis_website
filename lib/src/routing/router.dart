@@ -15,6 +15,8 @@ import 'package:genis_website/src/features/admin/presentation/admin_layout.dart'
 import 'package:genis_website/src/features/admin/presentation/admin_dashboard.dart';
 import 'package:genis_website/src/features/admin/presentation/clients_manager_page.dart';
 import 'package:genis_website/src/features/admin/presentation/projects_manager_page.dart';
+import 'package:genis_website/src/features/admin/presentation/deliverables_manager_page.dart';
+import 'package:genis_website/src/features/admin/presentation/audit_log_page.dart';
 import 'package:genis_website/src/shared/components/placeholder_screen.dart';
 
 final router = GoRouter(
@@ -107,11 +109,11 @@ final router = GoRouter(
         ),
         GoRoute(
           path: '/admin/deliverables',
-          builder: (context, state) => const PlaceholderScreen(title: 'Deliverables Manager'),
+          builder: (context, state) => const DeliverablesManagerPage(),
         ),
         GoRoute(
           path: '/admin/audit',
-          builder: (context, state) => const PlaceholderScreen(title: 'Audit Log'),
+          builder: (context, state) => const AuditLogPage(),
         ),
          GoRoute(
           path: '/admin/settings',
