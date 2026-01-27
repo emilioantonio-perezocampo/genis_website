@@ -39,9 +39,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
     final projectUpdates = updates.where((u) => u.projectId == project.id).toList();
     final projectDocs = docs.where((d) => d.projectId == project.id).toList();
     final projectFiles = files.where((f) => f.projectId == project.id).toList();
-    // Feedback mock data is not fully exposed in mock_data.dart yet, we might need to add it or mock it locally if missing.
-    // Checking mock_data.dart... I didn't export 'feedback' list in the previous step. 
-    // I will mock it locally for now or just use an empty list if not available.
+    final projectFeedback = feedback.where((f) => f.projectId == project.id).toList();
     
     final theme = Theme.of(context);
 
@@ -164,7 +162,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
             const Tab(text: "Milestones", icon: Icon(LucideIcons.map, size: 16)),
             Tab(text: "Documentation", icon: const Icon(LucideIcons.fileText, size: 16), child: _TabWithBadge(label: "Documentation", count: projectDocs.length)),
             Tab(text: "Files", icon: const Icon(LucideIcons.download, size: 16), child: _TabWithBadge(label: "Files", count: projectFiles.length)),
-            const Tab(text: "Feedback", icon: Icon(LucideIcons.messageSquare, size: 16)),
+            Tab(text: "Feedback", icon: const Icon(LucideIcons.messageSquare, size: 16), child: _TabWithBadge(label: "Feedback", count: projectFeedback.length)),
           ],
         ),
         
@@ -181,7 +179,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
               const _MilestonesTab(), // Mocked internally
               _DocsTab(docs: projectDocs),
               _FilesTab(files: projectFiles),
-              const _FeedbackTab(), // Mocked internally
+              _FeedbackTab(feedback: projectFeedback),
             ],
           ),
         ),
@@ -544,7 +542,8 @@ class _FilesTab extends StatelessWidget {
 }
 
 class _FeedbackTab extends StatelessWidget {
-  const _FeedbackTab();
+  final List<FeedbackItem> feedback;
+  const _FeedbackTab({required this.feedback});
 
   @override
   Widget build(BuildContext context) {
@@ -568,35 +567,43 @@ class _FeedbackTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        AppCard(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ 
-                  Row(children: [Text("Client User", style: TextStyle(fontWeight: FontWeight.bold)), SizedBox(width: 8), Text("2024-03-11", style: TextStyle(color: Colors.grey))]),
-                ],
-              ),
-              const SizedBox(height: 8),
-              const Text("The search results are much better, but latency is still around 400ms. Can we improve this?"),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(8)),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        ...feedback.map((item) => Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: AppCard(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: [Text("Emilio (GIS)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)), SizedBox(width: 8), Text("2024-03-11", style: TextStyle(color: Colors.grey, fontSize: 12))]),
-                    SizedBox(height: 4),
-                    Text("We are adding a caching layer next week which should drop it to <100ms.", style: TextStyle(fontSize: 13)),
+                    Row(children: [Text(item.author, style: const TextStyle(fontWeight: FontWeight.bold)), const SizedBox(width: 8), Text(item.date, style: const TextStyle(color: Colors.grey))]),
                   ],
                 ),
-              )
-            ],
+                const SizedBox(height: 8),
+                Text(item.text),
+                if (item.replies.isNotEmpty) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(8)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: item.replies.map((reply) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [Text(reply.author, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)), const SizedBox(width: 8), Text(reply.date, style: const TextStyle(color: Colors.grey, fontSize: 12))]),
+                          const SizedBox(height: 4),
+                          Text(reply.text, style: const TextStyle(fontSize: 13)),
+                        ],
+                      )).toList(),
+                    ),
+                  )
+                ]
+              ],
+            ),
           ),
-        ),
+        )),
       ],
     );
   }

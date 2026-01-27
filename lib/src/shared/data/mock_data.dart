@@ -122,3 +122,24 @@ const auditLogs = [
   AuditLogEntry(id: "al2", action: "Download", user: "Acme User", date: "2024-03-11 14:30:00", details: "Downloaded architecture_diagram.pdf"),
   AuditLogEntry(id: "al3", action: "Status Change", user: "Giovanna (GIS)", date: "2024-03-10 16:45:00", details: "Changed Project 1 status to In Progress"),
 ];
+
+const feedback = [
+  FeedbackItem(
+    id: "fb1", 
+    projectId: "1", 
+    author: "Client User", 
+    date: "2024-03-11", 
+    text: "The search results are much better, but latency is still around 400ms. Can we improve this?", 
+    replies: [
+      FeedbackReply(id: "r1", author: "Emilio (GIS)", date: "2024-03-11", text: "We are adding a caching layer next week which should drop it to <100ms.")
+    ]
+  ),
+  FeedbackItem(
+    id: "fb2", 
+    projectId: "1", 
+    author: "Client Admin", 
+    date: "2024-03-09", 
+    text: "Can we get an export feature for the logs?", 
+    replies: []
+  ),
+];

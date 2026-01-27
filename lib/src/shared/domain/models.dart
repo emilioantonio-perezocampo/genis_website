@@ -142,3 +142,35 @@ class AuditLogEntry {
     this.details,
   });
 }
+
+class FeedbackItem {
+  final String id;
+  final String projectId;
+  final String author;
+  final String date;
+  final String text;
+  final List<FeedbackReply> replies;
+
+  const FeedbackItem({
+    required this.id,
+    required this.projectId,
+    required this.author,
+    required this.date,
+    required this.text,
+    this.replies = const [],
+  });
+}
+
+class FeedbackReply {
+  final String id;
+  final String author;
+  final String date;
+  final String text;
+
+  const FeedbackReply({
+    required this.id,
+    required this.author,
+    required this.date,
+    required this.text,
+  });
+}
