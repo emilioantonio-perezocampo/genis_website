@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -211,12 +212,12 @@ class _ProofMetricsSection extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 64),
-              const Divider(color: Color(0xFF1E293B)), // Slate 800
+              const Divider(color: AppTheme.slate800), // Slate 800
               const SizedBox(height: 32),
               Text(
                 "TRUSTED BY INNOVATIVE TEAMS",
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: const Color(0xFF64748B), // Slate 500
+                      color: AppTheme.slate500, // Slate 500
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
                     ),
@@ -232,7 +233,7 @@ class _ProofMetricsSection extends StatelessWidget {
                     width: 128,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF334155), // Slate 700
+                      color: AppTheme.slate700, // Slate 700
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -269,7 +270,7 @@ class _MetricItem extends StatelessWidget {
         Text(
           label.toUpperCase(),
           style: const TextStyle(
-            color: Color(0xFF94A3B8), // Slate 400
+            color: AppTheme.slate400, // Slate 400
             fontSize: 14,
             letterSpacing: 1.5,
             fontWeight: FontWeight.w500,
@@ -417,8 +418,8 @@ class _CTASection extends StatelessWidget {
                 FilledButton(
                   onPressed: () => context.go('/contact'),
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFFF1F5F9), // Secondary light
-                    foregroundColor: const Color(0xFF0F172A), // Secondary foreground
+                    backgroundColor: AppTheme.slate100, // Secondary light
+                    foregroundColor: AppTheme.slate900, // Secondary foreground
                     padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
                     textStyle: const TextStyle(fontWeight: FontWeight.w600),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -194,7 +195,7 @@ class _PublicFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     // Footer bg: bg-slate-900 -> #0F172A
     return Container(
-      color: const Color(0xFF0F172A),
+      color: AppTheme.slate900,
       padding: const EdgeInsets.only(top: 48, bottom: 24, left: 24, right: 24),
       child: Center(
         child: ConstrainedBox(
@@ -279,11 +280,11 @@ class _PublicFooter extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 48),
-              const Divider(color: Color(0xFF1E293B)), // Slate 800
+              const Divider(color: AppTheme.slate800), // Slate 800
               const SizedBox(height: 32),
               const Text(
                 "© 2024 General Intelligence Solutions. All rights reserved.",
-                style: TextStyle(color: Color(0xFF64748B), fontSize: 12),
+                style: TextStyle(color: AppTheme.slate500, fontSize: 12),
               ),
             ],
           ),
@@ -303,14 +304,14 @@ class _FooterBrand extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(LucideIcons.globe, size: 24, color: Color(0xFFF1F5F9)), // Slate 100
+            const Icon(LucideIcons.globe, size: 24, color: AppTheme.slate100), // Slate 100
             const SizedBox(width: 8),
             Text(
               'GIS',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     letterSpacing: -1.0,
-                    color: const Color(0xFFF1F5F9),
+                    color: AppTheme.slate100,
                   ),
             ),
           ],
@@ -319,7 +320,7 @@ class _FooterBrand extends StatelessWidget {
         const Text(
           "General Intelligence Solutions.\nData, ML, and Agentic Systems that ship.",
           style: TextStyle(
-            color: Color(0xFF94A3B8), // Slate 400
+            color: AppTheme.slate400, // Slate 400
             height: 1.6,
             fontSize: 14,
           ),
@@ -343,7 +344,7 @@ class _FooterLinksColumn extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            color: Color(0xFFF1F5F9), // Slate 100
+            color: AppTheme.slate100, // Slate 100
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
@@ -361,7 +362,7 @@ class _FooterLinksColumn extends StatelessWidget {
                 child: Text(
                   link.$1,
                   style: const TextStyle(
-                    color: Color(0xFF94A3B8), // Slate 400
+                    color: AppTheme.slate400, // Slate 400
                     fontSize: 14,
                   ),
                 ),

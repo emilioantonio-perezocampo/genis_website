@@ -2,30 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // Tailwind Slate Palette
+  static const slate50 = Color(0xFFF8FAFC);
+  static const slate100 = Color(0xFFF1F5F9);
+  static const slate200 = Color(0xFFE2E8F0);
+  static const slate300 = Color(0xFFCBD5E1);
+  static const slate400 = Color(0xFF94A3B8);
+  static const slate500 = Color(0xFF64748B);
+  static const slate600 = Color(0xFF475569);
+  static const slate700 = Color(0xFF334155);
+  static const slate800 = Color(0xFF1E293B);
+  static const slate900 = Color(0xFF0F172A);
+  static const slate950 = Color(0xFF020617);
+
+  // Brand Colors from CSS
+  static const brandPrimary = Color(0xFF030213);
+  static const brandDestructive = Color(0xFFD4183D);
+
   static final lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFF030213),
+      primary: brandPrimary,
       onPrimary: Colors.white,
-      secondary: Color(0xFFF1F5F9), // Approx for oklch(0.95 0.0058 264.53)
-      onSecondary: Color(0xFF030213),
+      secondary: slate100, // --secondary
+      onSecondary: brandPrimary,
       surface: Colors.white,
-      onSurface: Color(0xFF0F172A), // Approx for oklch(0.145 0 0)
-      error: Color(0xFFD4183D),
+      onSurface: slate900, // --foreground
+      error: brandDestructive,
       onError: Colors.white,
-      outline: Color(0x1A000000), // border: rgba(0, 0, 0, 0.1)
+      outline: Color(0x1A000000), // --border
+      outlineVariant: slate200,
     ),
-    scaffoldBackgroundColor: Colors.white,
-    textTheme: GoogleFonts.interTextTheme(),
+    scaffoldBackgroundColor: Colors.white, // --background
+    textTheme: GoogleFonts.interTextTheme().apply(
+      bodyColor: slate900,
+      displayColor: slate900,
+    ),
     cardTheme: const CardThemeData(
       color: Colors.white,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Color(0x1A000000)), // border color
-        borderRadius: BorderRadius.all(Radius.circular(10)), // radius: 0.625rem ~= 10px
+        side: BorderSide(color: Color(0x1A000000)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
+    ),
+    dividerTheme: const DividerThemeData(
+      color: slate200,
+      thickness: 1,
     ),
   );
 
@@ -33,26 +58,34 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
-      primary: Colors.white, // --primary: oklch(0.985 0 0)
-      onPrimary: Color(0xFF0F172A), // --primary-foreground: oklch(0.205 0 0)
-      secondary: Color(0xFF1E293B), // --secondary: oklch(0.269 0 0)
+      primary: Colors.white, // --primary
+      onPrimary: slate900, // --primary-foreground
+      secondary: slate800, // --secondary
       onSecondary: Colors.white,
-      surface: Color(0xFF0F172A), // --background: oklch(0.145 0 0)
-      onSurface: Colors.white,
-      error: Color(0xFF7F1D1D), // --destructive dark approx
+      surface: slate900, // --background
+      onSurface: Colors.white, // --foreground
+      error: Color(0xFF7F1D1D),
       onError: Colors.white,
-      outline: Color(0xFF1E293B), // --border dark
+      outline: slate800, // --border
+      outlineVariant: slate700,
     ),
-    scaffoldBackgroundColor: const Color(0xFF0F172A),
-    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+    scaffoldBackgroundColor: slate900,
+    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).apply(
+      bodyColor: Colors.white,
+      displayColor: Colors.white,
+    ),
     cardTheme: const CardThemeData(
-      color: Color(0xFF0F172A),
+      color: slate900, // --card
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Color(0xFF1E293B)),
+        side: BorderSide(color: slate800),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
+    ),
+    dividerTheme: const DividerThemeData(
+      color: slate800,
+      thickness: 1,
     ),
   );
 }
