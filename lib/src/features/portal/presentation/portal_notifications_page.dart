@@ -78,7 +78,7 @@ class _PortalNotificationsPageState extends State<PortalNotificationsPage> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: filteredNotifications.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 16),
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemBuilder: (context, index) {
                 final notification = filteredNotifications[index];
                 return AppCard(
