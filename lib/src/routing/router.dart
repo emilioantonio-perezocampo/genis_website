@@ -9,6 +9,8 @@ import 'package:genis_website/src/features/auth/presentation/login_page.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_layout.dart';
 import 'package:genis_website/src/features/portal/presentation/portal_dashboard.dart';
 import 'package:genis_website/src/features/portal/presentation/project_detail_page.dart';
+import 'package:genis_website/src/features/portal/presentation/portal_search_page.dart';
+import 'package:genis_website/src/features/portal/presentation/portal_notifications_page.dart';
 import 'package:genis_website/src/features/admin/presentation/admin_layout.dart';
 import 'package:genis_website/src/features/admin/presentation/admin_dashboard.dart';
 import 'package:genis_website/src/features/admin/presentation/clients_manager_page.dart';
@@ -74,11 +76,6 @@ final router = GoRouter(
             return ProjectDetailPage(id: id);
           },
         ),
-import 'package:genis_website/src/features/portal/presentation/portal_search_page.dart';
-import 'package:genis_website/src/features/portal/presentation/portal_notifications_page.dart';
-
-// ...
-
         GoRoute(
           path: '/portal/search',
           builder: (context, state) => const PortalSearchPage(),
