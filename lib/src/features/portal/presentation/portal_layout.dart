@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genis_website/src/shared/components/sidebar_layout.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -14,6 +15,7 @@ class PortalLayout extends StatelessWidget {
       title: 'GIS Client Hub',
       sidebarColor: Colors.white,
       sidebarTextColor: Colors.black87,
+      scaffoldBackgroundColor: AppTheme.slate50,
       navItems: const [
         SidebarItem(label: 'Dashboard', path: '/portal/dashboard', icon: LucideIcons.layoutDashboard),
         SidebarItem(label: 'Projects', path: '/portal/projects/1', icon: LucideIcons.folderKanban),

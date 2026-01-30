@@ -73,13 +73,13 @@ class PortalDashboard extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const _UpdateLineItem(
-                  color: Colors.blue,
+                  color: AppTheme.blue600,
                   label: "Enterprise Search RAG:",
                   text: "New architecture diagram uploaded.",
                 ),
                 const SizedBox(height: 8),
                 const _UpdateLineItem(
-                  color: Colors.red,
+                  color: AppTheme.red600,
                   label: "Supply Chain Optimization:",
                   text: "Status changed to Blocked (waiting on API keys).",
                 ),
@@ -94,18 +94,18 @@ class PortalDashboard extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.grey[100],
-              border: Border.all(color: Colors.grey[200]!),
+              color: AppTheme.slate100,
+              border: Border.all(color: AppTheme.slate200),
               borderRadius: BorderRadius.circular(6),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(LucideIcons.alertCircle, size: 14, color: Colors.grey),
+                Icon(LucideIcons.alertCircle, size: 14, color: AppTheme.slate500),
                 SizedBox(width: 8),
                 Text(
                   "You only see your organization's projects and content.",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 12, color: AppTheme.slate500),
                 ),
               ],
             ),
@@ -219,7 +219,7 @@ class _ProjectCard extends StatelessWidget {
                   label: label,
                   variant: variant,
                 ),
-                const Icon(LucideIcons.arrowRight, size: 16, color: Colors.grey),
+                const Icon(LucideIcons.arrowRight, size: 16, color: AppTheme.slate400),
               ],
             ),
             const SizedBox(height: 16),
@@ -232,24 +232,24 @@ class _ProjectCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               project.description,
-              style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey[600], fontSize: 13),
+              style: theme.textTheme.bodyMedium?.copyWith(color: AppTheme.slate600, fontSize: 13),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
             Row(
               children: [
-                const Icon(LucideIcons.clock, size: 14, color: Colors.grey),
+                const Icon(LucideIcons.clock, size: 14, color: AppTheme.slate500),
                 const SizedBox(width: 4),
-                Text("Last update: ${project.lastUpdate}", style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                Text("Last update: ${project.lastUpdate}", style: const TextStyle(fontSize: 12, color: AppTheme.slate600)),
               ],
             ),
             const SizedBox(height: 4),
              Row(
               children: [
-                const Icon(LucideIcons.checkCircle2, size: 14, color: Colors.grey),
+                const Icon(LucideIcons.checkCircle2, size: 14, color: AppTheme.slate500),
                 const SizedBox(width: 4),
-                Text("Next milestone: ${project.nextMilestone}", style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                Text("Next milestone: ${project.nextMilestone}", style: const TextStyle(fontSize: 12, color: AppTheme.slate600)),
               ],
             ),
           ],
@@ -268,13 +268,13 @@ class _StartNewProjectCard extends StatelessWidget {
       onTap: () {},
       borderRadius: BorderRadius.circular(10),
       child: _DashedBorderContainer(
-        color: Colors.grey[300]!,
+        color: AppTheme.slate300,
         strokeWidth: 1,
         gap: 3,
         borderRadius: 10,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey[50],
+            color: AppTheme.slate50,
             borderRadius: BorderRadius.circular(10),
           ),
           width: double.infinity,
@@ -285,7 +285,7 @@ class _StartNewProjectCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                child: const Icon(LucideIcons.fileText, color: Colors.grey),
+                child: const Icon(LucideIcons.fileText, color: AppTheme.slate400),
               ),
               const SizedBox(height: 16),
               const Text(
@@ -296,7 +296,7 @@ class _StartNewProjectCard extends StatelessWidget {
               Text(
                 "Ready to scale? Let's discuss your next initiative.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                style: const TextStyle(fontSize: 12, color: AppTheme.slate500),
               ),
             ],
           ),

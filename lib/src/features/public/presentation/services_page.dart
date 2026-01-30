@@ -143,7 +143,7 @@ class _ServiceCategories extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(LucideIcons.check, size: 16, color: Colors.blue),
+                                  const Icon(LucideIcons.check, size: 16, color: AppTheme.blue600),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
@@ -316,7 +316,7 @@ class _EngagementCard extends StatelessWidget {
                       width: 6,
                       height: 6,
                       decoration: BoxDecoration(
-                        color: isPrimary ? Colors.blue : Colors.grey,
+                        color: isPrimary ? AppTheme.blue600 : AppTheme.slate500,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -360,7 +360,7 @@ class _EngagementCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: AppTheme.blue600,
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(

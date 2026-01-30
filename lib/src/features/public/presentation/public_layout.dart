@@ -11,7 +11,7 @@ class PublicLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // bg-slate-50 equivalent
+      backgroundColor: AppTheme.slate50, // bg-slate-50 equivalent
       body: Column(
         children: [
           const _PublicHeader(),

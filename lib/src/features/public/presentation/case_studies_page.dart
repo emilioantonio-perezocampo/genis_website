@@ -104,7 +104,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                     opacity: 0.8,
                                     child: ColorFiltered(
                                       colorFilter: const ColorFilter.mode(
-                                        Colors.grey,
+                                        AppTheme.slate500,
                                         BlendMode.saturation, // grayscale
                                       ),
                                       // Note: mix-blend-multiply is hard to replicate perfectly on network image without custom shader or complex stack,
@@ -113,7 +113,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                       child: Image.network(
                                         study.image,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.image_not_supported)),
+                                        errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.image_not_supported, color: AppTheme.slate400)),
                                       ),
                                     ),
                                   ),

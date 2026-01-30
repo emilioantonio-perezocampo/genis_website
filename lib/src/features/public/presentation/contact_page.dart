@@ -46,11 +46,11 @@ class _ContactPageState extends State<ContactPage> {
               Container(
                 width: 64,
                 height: 64,
-                decoration: BoxDecoration(
-                  color: Colors.green[100],
+                decoration: const BoxDecoration(
+                  color: AppTheme.green100,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(LucideIcons.check, size: 32, color: Colors.green[600]),
+                child: const Icon(LucideIcons.check, size: 32, color: AppTheme.green600),
               ),
               const SizedBox(height: 24),
               Text(
