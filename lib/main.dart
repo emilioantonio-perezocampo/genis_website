@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'General Intelligence Solutions',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       routerConfig: router,
     );
   }
