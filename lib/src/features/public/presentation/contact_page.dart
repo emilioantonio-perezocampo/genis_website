@@ -164,17 +164,40 @@ class _ContactPageState extends State<ContactPage> {
                           Form(
                             key: _formKey,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(child: AppTextField(placeholder: "Jane", validator: (v) => v!.isEmpty ? 'Required' : null)),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text("First name", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                          const SizedBox(height: 8),
+                                          AppTextField(placeholder: "Jane", validator: (v) => v!.isEmpty ? 'Required' : null),
+                                        ],
+                                      ),
+                                    ),
                                     const SizedBox(width: 16),
-                                    Expanded(child: AppTextField(placeholder: "Doe", validator: (v) => v!.isEmpty ? 'Required' : null)),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text("Last name", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                          const SizedBox(height: 8),
+                                          AppTextField(placeholder: "Doe", validator: (v) => v!.isEmpty ? 'Required' : null),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
+                                const Text("Work Email", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                const SizedBox(height: 8),
                                 AppTextField(placeholder: "jane@company.com", validator: (v) => v!.isEmpty ? 'Required' : null),
                                 const SizedBox(height: 16),
+                                const Text("Estimated Budget", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                const SizedBox(height: 8),
                                 const _DropdownInput(
                                   options: [
                                     "< \$25k (Advisory/Audit)",
@@ -184,8 +207,10 @@ class _ContactPageState extends State<ContactPage> {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
+                                const Text("What is your primary goal?", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                const SizedBox(height: 8),
                                 AppTextField(
-                                  placeholder: "E.g., We want to automate our customer support...",
+                                  placeholder: "E.g., We want to automate our customer support tier 1 responses using our KB...",
                                   maxLines: 4,
                                   validator: (v) => v!.isEmpty ? 'Required' : null,
                                 ),

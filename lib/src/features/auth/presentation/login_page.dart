@@ -135,17 +135,18 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Row(
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Expanded(child: Divider(color: AppTheme.slate200)),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
+                          Divider(color: AppTheme.slate200),
+                          Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: const Text(
                               "OR CONTINUE WITH",
                               style: TextStyle(fontSize: 10, color: AppTheme.slate500, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Expanded(child: Divider(color: AppTheme.slate200)),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -163,13 +164,17 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           const Text(
                             "Access is restricted to authorized clients only. ",
-                            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+                            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
                           ),
                           InkWell(
                             onTap: () => context.go('/contact'),
                             child: const Text(
                               "Request access",
-                              style: TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+                              style: TextStyle(
+                                fontSize: 12, 
+                                decoration: TextDecoration.underline,
+                                color: AppTheme.slate500, 
+                              ),
                             ),
                           )
                         ],
