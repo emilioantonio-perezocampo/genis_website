@@ -294,13 +294,14 @@ class _TimelineSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 800),
+          constraints: const BoxConstraints(maxWidth: 1000),
           child: Column(
             children: [
               Text(
                 "How We Work",
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      letterSpacing: -1.0,
                     ),
               ),
               const SizedBox(height: 16),
@@ -311,64 +312,156 @@ class _TimelineSection extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 64),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: steps.length,
-                itemBuilder: (context, index) {
-                  final item = steps[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 48.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: AppTheme.slate900,
-                            borderRadius: BorderRadius.circular(24),
-                            border: Border.all(color: Colors.white, width: 4),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            item.step,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 24),
-                        Expanded(
-                          child: Column(
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isDesktop = constraints.maxWidth >= 768;
+                  
+                  if (!isDesktop) {
+                    // Mobile Layout
+                    return Column(
+                      children: steps.map((item) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 48.0),
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                item.title,
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                      fontWeight: FontWeight.bold,
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 48,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.slate900,
+                                      borderRadius: BorderRadius.circular(24),
+                                      border: Border.all(color: Colors.white, width: 4),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withValues(alpha: 0.1),
+                                          blurRadius: 10,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ],
                                     ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      item.step,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 1,
+                                    height: 100, // Approximate height for connecting line
+                                    color: AppTheme.slate200,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                item.desc,
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: AppTheme.slate600,
+                              const SizedBox(width: 24),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      item.title,
+                                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      item.desc,
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                            color: AppTheme.slate600,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
+                        );
+                      }).toList(),
+                    );
+                  }
+
+                  // Desktop Layout (Zig-Zag)
+                  return Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      // Center Line
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        child: Container(
+                          width: 1,
+                          color: AppTheme.slate200,
                         ),
-                      ],
-                    ),
+                      ),
+                      // Items
+                      Column(
+                        children: steps.asMap().entries.map((entry) {
+                          final i = entry.key;
+                          final item = entry.value;
+                          final isEven = i % 2 == 0;
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 64.0),
+                            child: Row(
+                              children: [
+                                // Left Side
+                                Expanded(
+                                  child: isEven
+                                      ? _TimelineContent(item: item, alignRight: true)
+                                      : _TimelineStepLabel(step: item.step, alignRight: true),
+                                ),
+                                
+                                // Center Bubble
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      margin: const EdgeInsets.symmetric(horizontal: 24),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.slate900,
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(color: Colors.white, width: 4),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withValues(alpha: 0.1),
+                                            blurRadius: 10,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        item.step,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                // Right Side
+                                Expanded(
+                                  child: isEven
+                                      ? _TimelineStepLabel(step: item.step, alignRight: false)
+                                      : _TimelineContent(item: item, alignRight: false),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -376,6 +469,84 @@ class _TimelineSection extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _TimelineContent extends StatelessWidget {
+  final ({String desc, String step, String title}) item;
+  final bool alignRight;
+
+  const _TimelineContent({required this.item, required this.alignRight});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: alignRight ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.title,
+          textAlign: alignRight ? TextAlign.right : TextAlign.left,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          item.desc,
+          textAlign: alignRight ? TextAlign.right : TextAlign.left,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: AppTheme.slate500,
+              ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TimelineStepLabel extends StatelessWidget {
+  final String step;
+  final bool alignRight;
+
+  const _TimelineStepLabel({required this.step, required this.alignRight});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: alignRight ? MainAxisAlignment.end : MainAxisAlignment.start,
+      children: [
+        if (alignRight) ...[
+          Text(
+            "STEP $step",
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.slate400,
+            ),
+          ),
+          Container(
+            width: 48,
+            height: 1,
+            color: AppTheme.slate300,
+            margin: const EdgeInsets.only(left: 16),
+          ),
+        ] else ...[
+          Container(
+            width: 48,
+            height: 1,
+            color: AppTheme.slate300,
+            margin: const EdgeInsets.only(right: 16),
+          ),
+          Text(
+            "STEP $step",
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.slate400,
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

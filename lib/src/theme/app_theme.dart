@@ -210,10 +210,7 @@ class AppTheme {
       outline: _lightBorder,
       outlineVariant: _lightMuted,
     ),
-    textTheme: GoogleFonts.interTextTheme().apply(
-      bodyColor: _lightForeground,
-      displayColor: _lightForeground,
-    ),
+    textTheme: _buildTextTheme(_lightForeground),
     cardTheme: const CardThemeData(
       color: _lightCard,
       surfaceTintColor: Colors.transparent,
@@ -262,10 +259,7 @@ class AppTheme {
       outline: _darkBorder,
       outlineVariant: _darkMuted,
     ),
-    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).apply(
-      bodyColor: _darkForeground,
-      displayColor: _darkForeground,
-    ),
+    textTheme: _buildTextTheme(_darkForeground),
     cardTheme: const CardThemeData(
       color: _darkCard,
       surfaceTintColor: Colors.transparent,
@@ -297,4 +291,32 @@ class AppTheme {
       ),
     ],
   );
+
+  static TextTheme _buildTextTheme(Color foregroundColor) {
+    final baseTheme = GoogleFonts.interTextTheme();
+    final playfairTheme = GoogleFonts.playfairDisplayTextTheme();
+
+    return baseTheme.copyWith(
+      // Use Playfair Display for large display headings if intended by the import
+      displayLarge: playfairTheme.displayLarge?.copyWith(fontWeight: FontWeight.w700),
+      displayMedium: playfairTheme.displayMedium?.copyWith(fontWeight: FontWeight.w600),
+      displaySmall: playfairTheme.displaySmall?.copyWith(fontWeight: FontWeight.w500),
+      // Use Inter for the rest (standard UI text)
+      headlineLarge: baseTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700, letterSpacing: -1.0),
+      headlineMedium: baseTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w700, letterSpacing: -0.5),
+      headlineSmall: baseTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
+      titleLarge: baseTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+      titleMedium: baseTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+      titleSmall: baseTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+      bodyLarge: baseTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+      bodyMedium: baseTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+      bodySmall: baseTheme.bodySmall?.copyWith(fontWeight: FontWeight.w400),
+      labelLarge: baseTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500),
+      labelMedium: baseTheme.labelMedium?.copyWith(fontWeight: FontWeight.w500),
+      labelSmall: baseTheme.labelSmall?.copyWith(fontWeight: FontWeight.w500),
+    ).apply(
+      bodyColor: foregroundColor,
+      displayColor: foregroundColor,
+    );
+  }
 }
