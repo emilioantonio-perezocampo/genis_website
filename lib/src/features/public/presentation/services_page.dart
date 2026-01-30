@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class ServicesPage extends StatelessWidget {
@@ -184,7 +185,7 @@ class _EngagementModels extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(48),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
+              color: AppTheme.slate50,
               borderRadius: BorderRadius.circular(24),
             ),
             child: Column(
