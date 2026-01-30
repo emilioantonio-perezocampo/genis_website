@@ -6,6 +6,7 @@ import 'package:genis_website/src/shared/domain/models.dart';
 import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'dart:ui' as ui;
 
 class PortalDashboard extends StatelessWidget {
   const PortalDashboard({super.key});
@@ -184,29 +185,25 @@ class _ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    Color badgeBg;
-    Color badgeFg;
+    AppBadgeVariant variant;
+    String label = project.status;
     
     switch (project.status) {
       case "In Progress":
-        badgeBg = Colors.blue[50]!;
-        badgeFg = Colors.blue[700]!;
+        variant = AppBadgeVariant.info;
         break;
       case "Blocked":
-        badgeBg = Colors.red[50]!;
-        badgeFg = Colors.red[700]!;
+        variant = AppBadgeVariant.destructive;
         break;
       case "Review":
-        badgeBg = Colors.orange[50]!;
-        badgeFg = Colors.orange[700]!;
+        variant = AppBadgeVariant.warning;
+        label = "In Review";
         break;
       case "Done":
-        badgeBg = Colors.green[50]!;
-        badgeFg = Colors.green[700]!;
+        variant = AppBadgeVariant.success;
         break;
       default:
-        badgeBg = Colors.grey[100]!;
-        badgeFg = Colors.grey[700]!;
+        variant = AppBadgeVariant.secondary;
     }
 
     return AppCard(
@@ -219,9 +216,8 @@ class _ProjectCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppBadge(
-                  label: project.status,
-                  backgroundColor: badgeBg,
-                  foregroundColor: badgeFg,
+                  label: label,
+                  variant: variant,
                 ),
                 const Icon(LucideIcons.arrowRight, size: 16, color: Colors.grey),
               ],
@@ -270,34 +266,123 @@ class _StartNewProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[50],
-          border: Border.all(color: Colors.grey[300]!, style: BorderStyle.solid), // Should be dashed ideally
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-              child: const Icon(LucideIcons.fileText, color: Colors.grey),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "Start a new project",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              "Ready to scale? Let's discuss your next initiative.",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-            ),
-          ],
+      borderRadius: BorderRadius.circular(10),
+      child: _DashedBorderContainer(
+        color: Colors.grey[300]!,
+        strokeWidth: 1,
+        gap: 3,
+        borderRadius: 10,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                child: const Icon(LucideIcons.fileText, color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                "Start a new project",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "Ready to scale? Let's discuss your next initiative.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class _DashedBorderContainer extends StatelessWidget {
+  final Widget child;
+  final Color color;
+  final double strokeWidth;
+  final double gap;
+  final double borderRadius;
+
+  const _DashedBorderContainer({
+    required this.child,
+    this.color = Colors.black,
+    this.strokeWidth = 1.0,
+    this.gap = 5.0,
+    this.borderRadius = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _DashedBorderPainter(
+        color: color,
+        strokeWidth: strokeWidth,
+        gap: gap,
+        borderRadius: borderRadius,
+      ),
+      child: child,
+    );
+  }
+}
+
+class _DashedBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double gap;
+  final double borderRadius;
+
+  _DashedBorderPainter({
+    required this.color,
+    required this.strokeWidth,
+    required this.gap,
+    required this.borderRadius,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke;
+
+    final Path path = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        Radius.circular(borderRadius),
+      ));
+
+    final Path dashPath = Path();
+    final double dashWidth = 5.0;
+    
+    for (ui.PathMetric pathMetric in path.computeMetrics()) {
+      double distance = 0.0;
+      while (distance < pathMetric.length) {
+        dashPath.addPath(
+          pathMetric.extractPath(distance, distance + dashWidth),
+          Offset.zero,
+        );
+        distance += dashWidth + gap;
+      }
+    }
+
+    canvas.drawPath(dashPath, paint);
+  }
+
+  @override
+  bool shouldRepaint(_DashedBorderPainter oldDelegate) {
+    return oldDelegate.color != color ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.gap != gap ||
+        oldDelegate.borderRadius != borderRadius;
   }
 }
