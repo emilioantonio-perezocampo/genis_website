@@ -116,8 +116,13 @@ class AppTheme {
   static const green600 = Color(0xFF16A34A);
 
   // Tailwind Red Palette
+  static const red50 = Color(0xFFFEF2F2);
   static const red100 = Color(0xFFFEE2E2);
+  static const red200 = Color(0xFFFECACA);
   static const red600 = Color(0xFFDC2626);
+  static const red700 = Color(0xFFB91C1C);
+  static const red800 = Color(0xFF991B1B);
+  static const red900 = Color(0xFF7F1D1D);
   
   // Brand Colors
   static const brandPrimary = Color(0xFF030213);

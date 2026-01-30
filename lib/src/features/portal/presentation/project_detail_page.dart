@@ -3,6 +3,7 @@ import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/shared/data/mock_data.dart';
 import 'package:genis_website/src/shared/domain/models.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -51,10 +52,10 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
           children: [
             InkWell(
               onTap: () => context.go('/portal/dashboard'),
-              child: Text("Dashboard", style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+              child: const Text("Dashboard", style: TextStyle(color: AppTheme.slate600, fontSize: 14)),
             ),
             const SizedBox(width: 8),
-            Icon(LucideIcons.chevronRight, size: 14, color: Colors.grey[400]),
+            const Icon(LucideIcons.chevronRight, size: 14, color: AppTheme.slate400),
             const SizedBox(width: 8),
             Text(project.name, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
           ],
@@ -84,7 +85,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
                   const SizedBox(height: 8),
                   Text(
                     project.description,
-                    style: theme.textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
+                    style: theme.textTheme.bodyLarge?.copyWith(color: AppTheme.slate600),
                   ),
                 ],
               ),
@@ -100,30 +101,30 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.red[50],
-              border: Border.all(color: Colors.red[200]!),
+              color: AppTheme.red50,
+              border: Border.all(color: AppTheme.red200),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(LucideIcons.alertTriangle, size: 20, color: Colors.red[700]),
+                const Icon(LucideIcons.alertTriangle, size: 20, color: AppTheme.red600), // red-600 matches Lucide default alert usually, React used red-600
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Project is currently blocked", style: TextStyle(color: Colors.red[900], fontWeight: FontWeight.bold)),
+                      const Text("Project is currently blocked", style: TextStyle(color: AppTheme.red900, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 4),
-                      Text("Reason: ${project.blockedReason}", style: TextStyle(color: Colors.red[800], fontSize: 13)),
+                      Text("Reason: ${project.blockedReason}", style: const TextStyle(color: AppTheme.red800, fontSize: 13)),
                       const SizedBox(height: 12),
                       Row(
                         children: [
                           FilledButton(
                             onPressed: () {}, 
                             style: FilledButton.styleFrom(
-                              backgroundColor: Colors.red[100], 
-                              foregroundColor: Colors.red[900],
+                              backgroundColor: AppTheme.red100, 
+                              foregroundColor: AppTheme.red900,
                               elevation: 0,
                             ),
                             child: const Text("Resolve Blocker"),
@@ -132,8 +133,8 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
                           OutlinedButton(
                             onPressed: () {},
                             style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.red[200]!),
-                              foregroundColor: Colors.red[800],
+                              side: const BorderSide(color: AppTheme.red200),
+                              foregroundColor: AppTheme.red800,
                             ),
                             child: const Text("View Dependency"),
                           ),
@@ -153,7 +154,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> with SingleTicker
           controller: _tabController,
           isScrollable: true,
           labelColor: theme.colorScheme.primary,
-          unselectedLabelColor: Colors.grey[500],
+          unselectedLabelColor: AppTheme.slate500,
           indicatorColor: theme.colorScheme.primary,
           tabAlignment: TabAlignment.start,
           tabs: [
@@ -219,8 +220,8 @@ class _TabWithBadge extends StatelessWidget {
         const SizedBox(width: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-          decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)),
-          child: Text("$count", style: const TextStyle(fontSize: 10, color: Colors.black87)),
+          decoration: BoxDecoration(color: AppTheme.slate200, borderRadius: BorderRadius.circular(10)),
+          child: Text("$count", style: const TextStyle(fontSize: 10, color: AppTheme.slate900)),
         ),
       ],
     );
@@ -251,22 +252,22 @@ class _OverviewTab extends StatelessWidget {
                   title: "Project Kickoff",
                   date: "Feb 20, 2024",
                   icon: LucideIcons.checkCircle,
-                  iconColor: Colors.green,
-                  lineColor: Colors.grey[300]!,
+                  iconColor: AppTheme.green600,
+                  lineColor: AppTheme.slate300,
                 ),
                 _TimelineItem(
                   title: "Architecture Validation",
                   date: "Target: Mar 15, 2024",
                   desc: "Currently validating vector database performance metrics.",
                   icon: Icons.circle,
-                  iconColor: Colors.blue,
-                  lineColor: Colors.grey[300]!,
+                  iconColor: AppTheme.blue600,
+                  lineColor: AppTheme.slate300,
                 ),
                 _TimelineItem(
                   title: "MVP Release",
                   date: "Target: Apr 01, 2024",
                   icon: Icons.circle,
-                  iconColor: Colors.grey,
+                  iconColor: AppTheme.slate500,
                   isLast: true,
                 ),
               ],
@@ -279,11 +280,11 @@ class _OverviewTab extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("PROJECT OWNERS", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[500], letterSpacing: 1.0)),
+                const Text("PROJECT OWNERS", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.slate500, letterSpacing: 1.0)),
                 const SizedBox(height: 16),
-                _UserRow(initials: "EM", name: "Emilio M.", role: "Lead Engineer (GIS)"),
+                const _UserRow(initials: "EM", name: "Emilio M.", role: "Lead Engineer (GIS)"),
                 const SizedBox(height: 16),
-                _UserRow(initials: "GD", name: "Giovanna D.", role: "Product Manager (GIS)"),
+                const _UserRow(initials: "GD", name: "Giovanna D.", role: "Product Manager (GIS)"),
               ],
             ),
           ),
@@ -324,7 +325,7 @@ class _TimelineItem extends StatelessWidget {
               child: Icon(icon, size: 20, color: iconColor),
             ),
             if (!isLast)
-              Container(width: 2, height: 60, color: lineColor ?? Colors.grey[300]),
+              Container(width: 2, height: 60, color: lineColor ?? AppTheme.slate300),
           ],
         ),
         const SizedBox(width: 16),
@@ -333,10 +334,10 @@ class _TimelineItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(date, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+              Text(date, style: const TextStyle(color: AppTheme.slate500, fontSize: 12)),
               if (desc != null) ...[
                 const SizedBox(height: 4),
-                Text(desc!, style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                Text(desc!, style: const TextStyle(color: AppTheme.slate600, fontSize: 13)),
               ],
               const SizedBox(height: 24),
             ],
@@ -358,13 +359,13 @@ class _UserRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(backgroundColor: Colors.grey[200], child: Text(initials, style: const TextStyle(fontSize: 12, color: Colors.black87))),
+        CircleAvatar(backgroundColor: AppTheme.slate200, child: Text(initials, style: const TextStyle(fontSize: 12, color: AppTheme.slate900))),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text(role, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+            Text(role, style: const TextStyle(color: AppTheme.slate500, fontSize: 12)),
           ],
         ),
       ],
@@ -389,13 +390,13 @@ class _UpdatesTab extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CircleAvatar(radius: 16, backgroundColor: Colors.grey[200], child: Text(update.author[0])),
+                  CircleAvatar(radius: 16, backgroundColor: AppTheme.slate200, child: Text(update.author[0])),
                   const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("${update.author} posted an update", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                      Text(update.date, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                      Text(update.date, style: const TextStyle(color: AppTheme.slate500, fontSize: 12)),
                     ],
                   ),
                 ],
@@ -463,7 +464,7 @@ class _DocsTab extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("CONTENTS", style: TextStyle(color: Colors.grey[400], fontSize: 12, fontWeight: FontWeight.bold)),
+                const Text("CONTENTS", style: TextStyle(color: AppTheme.slate400, fontSize: 12, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 ...docs.map((doc) => ListTile(
                   dense: true,
@@ -489,7 +490,7 @@ class _DocsTab extends StatelessWidget {
                     const Text("Technical Architecture v1.0", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(border: Border.all(color: Colors.grey[300]!), borderRadius: BorderRadius.circular(4)),
+                      decoration: BoxDecoration(border: Border.all(color: AppTheme.slate300), borderRadius: BorderRadius.circular(4)),
                       child: const Text("Markdown", style: TextStyle(fontSize: 12)),
                     )
                   ],
@@ -528,7 +529,7 @@ class _FilesTab extends StatelessWidget {
           ],
           rows: files.map((file) => DataRow(
             cells: [
-              DataCell(Row(children: [const Icon(LucideIcons.fileText, size: 16, color: Colors.grey), const SizedBox(width: 8), Text(file.name)])),
+              DataCell(Row(children: [const Icon(LucideIcons.fileText, size: 16, color: AppTheme.slate500), const SizedBox(width: 8), Text(file.name)])),
               DataCell(Text(file.version)),
               DataCell(Text(file.date)),
               DataCell(IconButton(icon: const Icon(LucideIcons.download, size: 16), onPressed: () {})),
@@ -576,7 +577,7 @@ class _FeedbackTab extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: [Text(item.author, style: const TextStyle(fontWeight: FontWeight.bold)), const SizedBox(width: 8), Text(item.date, style: const TextStyle(color: Colors.grey))]),
+                    Row(children: [Text(item.author, style: const TextStyle(fontWeight: FontWeight.bold)), const SizedBox(width: 8), Text(item.date, style: const TextStyle(color: AppTheme.slate500))]),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -585,13 +586,13 @@ class _FeedbackTab extends StatelessWidget {
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(color: AppTheme.slate50, borderRadius: BorderRadius.circular(8)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: item.replies.map((reply) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [Text(reply.author, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)), const SizedBox(width: 8), Text(reply.date, style: const TextStyle(color: Colors.grey, fontSize: 12))]),
+                          Row(children: [Text(reply.author, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)), const SizedBox(width: 8), Text(reply.date, style: const TextStyle(color: AppTheme.slate500, fontSize: 12))]),
                           const SizedBox(height: 4),
                           Text(reply.text, style: const TextStyle(fontSize: 13)),
                         ],
