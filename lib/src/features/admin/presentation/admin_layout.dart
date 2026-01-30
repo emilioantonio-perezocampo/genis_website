@@ -17,6 +17,9 @@ class AdminLayout extends StatelessWidget {
       sidebarSelectedColor: const Color(0xFF1E293B), // Slate 800
       sidebarSelectedTextColor: Colors.white,
       sidebarHoverColor: const Color(0xFF1E293B), // Slate 800
+      menuLabel: null, // React layout doesn't have "Menu" label
+      dividerColor: const Color(0xFF1E293B), // Slate 800
+      scaffoldBackgroundColor: const Color(0xFFF1F5F9), // Slate 100
       navItems: const [
         SidebarItem(label: 'Dashboard', path: '/admin/dashboard', icon: LucideIcons.shield),
         SidebarItem(label: 'Clients', path: '/admin/clients', icon: LucideIcons.users),
@@ -39,6 +42,7 @@ class AdminLayout extends StatelessWidget {
             alignment: Alignment.centerLeft,
             side: BorderSide.none,
             foregroundColor: const Color(0xFF94A3B8), // Slate 400
+            // Note: Flutter ButtonStyle hoverColor affects background, not foreground text color easily without MaterialStateProperty
           ),
         ),
       ),

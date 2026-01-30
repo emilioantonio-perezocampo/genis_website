@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:genis_website/src/features/public/presentation/landing_page.dart';
 import 'package:genis_website/src/features/public/presentation/services_page.dart';
@@ -74,6 +73,12 @@ final router = GoRouter(
       builder: (context, state) => const NotFoundPage(),
     ),
 
+    // Portal Redirect
+    GoRoute(
+      path: '/portal',
+      redirect: (context, state) => '/portal/dashboard',
+    ),
+
     // Portal (Protected)
     ShellRoute(
       builder: (context, state, child) {
@@ -100,6 +105,12 @@ final router = GoRouter(
           builder: (context, state) => const PortalNotificationsPage(),
         ),
       ],
+    ),
+
+    // Admin Redirect
+    GoRoute(
+      path: '/admin',
+      redirect: (context, state) => '/admin/dashboard',
     ),
 
     // Admin (Protected)

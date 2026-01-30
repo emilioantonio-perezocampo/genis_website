@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/shared/data/mock_data.dart';
 import 'package:genis_website/src/theme/app_theme.dart';

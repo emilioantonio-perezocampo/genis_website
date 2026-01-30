@@ -380,7 +380,7 @@ class _UpdatesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: updates.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 16),
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
         final update = updates[index];
         return AppCard(

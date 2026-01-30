@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:genis_website/src/theme/app_theme.dart';
 
 class AppCard extends StatelessWidget {
   final Widget child;

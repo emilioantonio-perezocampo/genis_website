@@ -142,9 +142,19 @@ class _PublicHeaderState extends State<_PublicHeader> {
           // Mobile Nav Dropdown
           if (_isMobileMenuOpen && MediaQuery.of(context).size.width < 768)
             Container(
-              color: Colors.white,
               width: double.infinity,
               padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(bottom: BorderSide(color: AppTheme.slate200)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
