@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:genis_website/src/shared/components/app_badge.dart';
 import 'package:genis_website/src/shared/components/app_card.dart';
 import 'package:genis_website/src/shared/data/mock_data.dart';
+import 'package:genis_website/src/theme/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CaseStudiesPage extends StatelessWidget {
@@ -86,11 +86,11 @@ class _CaseStudiesGrid extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final study = caseStudies[index];
                   return AppCard(
-                    padding: EdgeInsets.zero, // Custom padding handled inside
+                    padding: EdgeInsets.zero,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Image
+                        // Image with effects
                         Expanded(
                           flex: 5,
                           child: Stack(
@@ -98,17 +98,23 @@ class _CaseStudiesGrid extends StatelessWidget {
                             children: [
                               ClipRRect(
                                 borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-                                child: ColorFiltered(
-                                  colorFilter: const ColorFilter.mode(
-                                    Colors.grey,
-                                    BlendMode.saturation,
-                                  ),
-                                  child: Image.network(
-                                    study.image,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) => Container(
-                                      color: Colors.grey[200],
-                                      child: const Center(child: Icon(Icons.image_not_supported)),
+                                child: Container(
+                                  color: AppTheme.slate100, // base bg
+                                  child: Opacity(
+                                    opacity: 0.8,
+                                    child: ColorFiltered(
+                                      colorFilter: const ColorFilter.mode(
+                                        Colors.grey,
+                                        BlendMode.saturation, // grayscale
+                                      ),
+                                      // Note: mix-blend-multiply is hard to replicate perfectly on network image without custom shader or complex stack,
+                                      // but opacity + grayscale + slate bg gets very close to the "faded look".
+                                      // For BlendMode.multiply, we'd need to blend with the container color.
+                                      child: Image.network(
+                                        study.image,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.image_not_supported)),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -116,9 +122,20 @@ class _CaseStudiesGrid extends StatelessWidget {
                               Positioned(
                                 top: 16,
                                 left: 16,
-                                child: AppBadge(
-                                  label: study.industry,
-                                  variant: AppBadgeVariant.secondary,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.9),
+                                    borderRadius: BorderRadius.circular(99),
+                                  ),
+                                  child: Text(
+                                    study.industry,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppTheme.slate900,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -135,7 +152,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                 Text(
                                   study.category,
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        color: Colors.blue,
+                                        color: AppTheme.blue600,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
@@ -156,7 +173,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                     Text(
                                       "OUTCOME",
                                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                        color: Colors.grey,
+                                        color: AppTheme.slate500,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1.0,
                                       ),
@@ -164,7 +181,7 @@ class _CaseStudiesGrid extends StatelessWidget {
                                     const SizedBox(height: 4),
                                     Text(
                                       study.outcome,
-                                      style: const TextStyle(fontWeight: FontWeight.w500),
+                                      style: const TextStyle(fontWeight: FontWeight.w500, color: AppTheme.slate900),
                                     ),
                                   ],
                                 ),
@@ -173,18 +190,22 @@ class _CaseStudiesGrid extends StatelessWidget {
                           ),
                         ),
                         // Footer
-                        Padding(
+                        Container(
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          decoration: const BoxDecoration(
+                            border: Border(top: BorderSide(color: AppTheme.slate100)),
+                          ),
                           child: Row(
                             children: [
                               Text(
                                 "Read full story",
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
+                                  color: AppTheme.slate900,
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              const Icon(LucideIcons.arrowUpRight, size: 16),
+                              const Icon(LucideIcons.arrowUpRight, size: 16, color: AppTheme.slate900),
                             ],
                           ),
                         ),
@@ -213,9 +234,9 @@ class _QuoteSection extends StatelessWidget {
           padding: const EdgeInsets.all(32),
           constraints: const BoxConstraints(maxWidth: 800),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
+            color: AppTheme.slate50,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Theme.of(context).colorScheme.outline),
+            border: Border.all(color: AppTheme.slate200),
           ),
           child: Column(
             children: [
@@ -223,14 +244,14 @@ class _QuoteSection extends StatelessWidget {
                 '"GIS helped us ship a feature in 6 weeks that our internal team had been stuck on for 6 months."',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
-                  fontStyle: FontStyle.italic,
+                  color: AppTheme.slate600,
+                  fontStyle: FontStyle.normal, // React doesn't explicitly imply italic, just text-slate-600.
                 ),
               ),
               const SizedBox(height: 16),
               const Text(
                 "– CTO, Series B Fintech",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.slate900),
               ),
             ],
           ),
